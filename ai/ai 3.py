@@ -1,4 +1,3 @@
-
 # Lab Title: To implement simple Linear Regression and Plot the graph
 # Objective: The objective of this lab is to implement simple linear regression in Python
 #            and visualize the linear regression line on a scatter plot. 
@@ -9,21 +8,17 @@
 # Import necessary libraries
 import numpy as np
 import matplotlib.pyplot as plt
-from sklearn.datasets import load_iris
+from sklearn.datasets import load_diabetes
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 
-# Load the Iris dataset
-iris = load_iris()
-X = iris.data[:, 2:3]  # Consider only one feature (petal length)
-y = iris.target
-
-# For simplicity, let's focus on one class (setosa) for the regression task
-setosa_indices = np.where(y == 0)
-X_setosa = X[setosa_indices].reshape(-1, 1)
+# Load the Diabetes dataset
+diabetes = load_diabetes()
+X = diabetes.data[:, 2:3]  # Consider only one feature (BMI)
+y = diabetes.target
 
 # Split the data into training and testing sets
-X_train, X_test, y_train, y_test = train_test_split(X_setosa, y[setosa_indices], test_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # Implement simple linear regression
 linear_reg_model = LinearRegression()
@@ -35,8 +30,9 @@ y_pred = linear_reg_model.predict(X_test)
 # Visualize the linear regression line on a scatter plot
 plt.scatter(X_test, y_test, color='blue', label='Actual Data')
 plt.plot(X_test, y_pred, color='red', linewidth=3, label='Linear Regression Line')
-plt.title('Simple Linear Regression on Iris Dataset (Petal Length)')
-plt.xlabel('Petal Length (cm)')
-plt.ylabel('Iris Class (Setosa)')
+plt.title('Simple Linear Regression on Diabetes Dataset (BMI)')
+plt.xlabel('BMI')
+plt.ylabel('Diabetes Progression')
 plt.legend()
 plt.show()
+
